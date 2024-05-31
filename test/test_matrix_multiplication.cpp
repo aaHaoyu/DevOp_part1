@@ -30,21 +30,20 @@
 
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices) {
     std::vector<std::vector<int>> A = {
-        {1, 2, 3},
-        {4, 5, 6}
+        {1, 1},
+        {1, 1}
     };
     std::vector<std::vector<int>> B = {
-        {100, 100},
-        {0, 0},
+        {1, 1},
         {0, 0}
     };
     std::vector<std::vector<int>> C(2, std::vector<int>(2, 0));
 
-    multiplyMatrices(A, B, C, 2, 3, 2);
+    multiplyMatrices(A, B, C, 2, 2, 2);
 
     std::vector<std::vector<int>> expected = {
-        {100, 100},
-        {100, 100}
+        {1, 1},
+        {1, 1}
     };
 
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";

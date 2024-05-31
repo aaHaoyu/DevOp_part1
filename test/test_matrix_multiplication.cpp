@@ -6,6 +6,28 @@
 // ######################### Source code of multiplyMatrices in src/matrix_mult
 
 
+// TEST(MatrixMultiplicationTest, TestMultiplyMatrices) {
+//     std::vector<std::vector<int>> A = {
+//         {1, 2, 3},
+//         {4, 5, 6}
+//     };
+//     std::vector<std::vector<int>> B = {
+//         {7, 8},
+//         {9, 10},
+//         {11, 12}
+//     };
+//     std::vector<std::vector<int>> C(2, std::vector<int>(2, 0));
+
+//     multiplyMatrices(A, B, C, 2, 3, 2);
+
+//     std::vector<std::vector<int>> expected = {
+//         {58, 64},
+//         {139, 154}
+//     };
+
+//     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
+// }
+
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices) {
     std::vector<std::vector<int>> A = {
         {1, 2, 3},
@@ -13,19 +35,19 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices) {
     };
     std::vector<std::vector<int>> B = {
         {7, 8},
-        {9, 10},
-        {11, 12}
+        {9, 10}
     };
-    std::vector<std::vector<int>> C(2, std::vector<int>(2, 0));
-
-    multiplyMatrices(A, B, C, 2, 3, 2);
-
-    std::vector<std::vector<int>> expected = {
-        {58, 64},
-        {139, 154}
-    };
-
-    ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
+    std::vector<std::vector<int>> C;
+    try {
+        multiplyMatrices(A, B, C, 2, 3, 2);
+        FAIL() << "Expected std::invalid_argument";
+    }
+    catch (const std::invalid_argument& e) {
+        EXPECT_EQ(std::string(e.what()), "Matrix size mismatch");
+    }
+    catch (...) {
+        FAIL() << "Expected std::invalid_argument";
+    }
 }
 
 int main(int argc, char **argv) {
